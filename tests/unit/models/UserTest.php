@@ -2,24 +2,14 @@
 
 namespace tests\unit\model;
 
+use app\models\User;
 
 class UserTest extends \Codeception\Test\Unit
 {
     public function testFindUserById()
     {
-        $this->assertTrue(true);
-        $this->assertFalse(false);
-    }
-
-    public function testFindUserByAccessToken()
-    {
-        $this->assertTrue(true);
-        $this->assertFalse(false);
-    }
-
-    public function testFindUserByUsername()
-    {
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        verify($user = User::findIdentity(1));
+        verify($user)->notEmpty();
+        verify($user->username)->equals('admin');
     }
 }
