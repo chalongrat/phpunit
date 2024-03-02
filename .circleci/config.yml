@@ -1,0 +1,21 @@
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  test:
+    docker:
+      - image: cimg/php:8.1.2-browsers
+    steps:
+      - checkout
+
+      # Install Composer dependencies
+      - run: php /usr/local/bin/composer install
+
+      # Run Codeception dev
+      - run: ./vendor/bin/codecept run
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - test
